@@ -1,7 +1,7 @@
 (ns de.otto.tesla.example.page
   (:require
     [com.stuartsierra.component :as c]
-    [de.otto.tesla.stateful.routes :as routes]
+    [de.otto.tesla.stateful.handler :as handler]
     [de.otto.status :as status]
     [de.otto.tesla.stateful.app-status :as app-status]
     [de.otto.tesla.example.calculating :as calculating]
@@ -23,9 +23,9 @@
 (defrecord Page []
   c/Lifecycle
   (start [self]
-    (routes/register-routes (:routes self)
-                            [(compojure/GET "/example" [_] (usage-page self))
-                             (compojure/GET "/example/:input" [input] (result-page self input))])
+    (handler/register-handler (:handler self)
+    (compojure/routes (compojure/GET "/example" [_] (usage-page self))
+                             (compojure/GET "/example/:input" [input] (result-page self input))))
     (app-status/register-status-fun (:app-status self)
       (fn [] (status/status-detail :example-page :ok "page is always fine")))
     self)
