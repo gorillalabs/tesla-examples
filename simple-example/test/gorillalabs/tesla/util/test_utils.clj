@@ -1,10 +1,10 @@
-(ns de.otto.tesla.util.test-utils
+(ns gorillalabs.tesla.util.test-utils
   (:require [clojure.test :refer :all]
-            [com.stuartsierra.component :as comp]
+            #_[com.stuartsierra.component :as comp]
             [ring.mock.request :as mock]))
 
 
-(defmacro with-started
+#_(defmacro with-started
   "bindings => [name init ...]
 
   Evaluates body in a try expression with names bound to the values
